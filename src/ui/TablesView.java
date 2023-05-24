@@ -1,7 +1,6 @@
 package ui;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class TablesView extends JPanel {
     public TablesView() {
