@@ -14,7 +14,7 @@ public class View {
         this.window = new JFrame("Restaurant soft");
         window.setSize(800, 600);
 
-        this.loginView = new JPanel();
+        this.loginView = new LoginView();
         this.mainView = new JPanel(new BorderLayout());
 
         this.mainView.add(new TablesView(), BorderLayout.CENTER);
