@@ -1,3 +1,5 @@
+package model;
+
 class User {
     private int id;
     private int password;
