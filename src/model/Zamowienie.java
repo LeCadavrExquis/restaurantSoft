@@ -40,6 +40,7 @@ public class Zamowienie
     void addToOrder(double price, String type, int id)
     {
         danie.add(new Dania());
+
     }
 
     void rmFromOrder(int id)

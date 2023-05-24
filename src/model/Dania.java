@@ -7,7 +7,11 @@ public class Dania
     public double price = 0;
     public String type = "undefined";
 
-    Dania(double price, String type)
+    Dania()
+    {
+
+    }
+    Dania(double price, String type, int id)
     {
         try
         {
