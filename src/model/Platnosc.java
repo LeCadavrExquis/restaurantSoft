@@ -1,3 +1,5 @@
+package model;
+
 public class Platnosc {
     public boolean zatwierdzono;
     public boolean czykarta;
