@@ -14,18 +14,20 @@ public class Keypad extends JPanel implements ActionListener {
     String[] numPadContent = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"};
     ArrayList<JButton> buttonList;
 
+    ActionListener listener;
+
     // Keypad constructor class
-    public Keypad(Container pane) {
+    public Keypad() {
         // sets the size of the Keypad display
-        pane.setPreferredSize(new Dimension(320, 335));
+        this.setPreferredSize(new Dimension(320, 335));
 
         // initialize display to hold displayContent
         display = new JLabel(displayContent);
         display.setPreferredSize(new Dimension(320, 25));
         // create lowered bevel border around the display
         display.setBorder(BorderFactory.createLoweredBevelBorder());
-        // add the display to the panel
-        pane.add(display, BorderLayout.PAGE_START);
+        // add the display to the thisl
+        this.add(display, BorderLayout.PAGE_START);
 
         // initialize the buttonList
         buttonList = new ArrayList<JButton>(12);
@@ -39,23 +41,23 @@ public class Keypad extends JPanel implements ActionListener {
             numButton = new JButton(numPadContent[i]);
             buttonList.add(numButton);
         }
-        // add the buttonList to the number panel
+        // add the buttonList to the number thisl
         for (int n = 0; n < buttonList.size(); n++) {
             buttonList.get(n).addActionListener(this);
             numberPanel.add(buttonList.get(n));
         }
 
-        // create black border around the number panel
+        // create black border around the number thisl
         numberPanel.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Color.black));
         // add number panel to center part of display
-        pane.add(numberPanel, BorderLayout.LINE_END);
+        this.add(numberPanel, BorderLayout.LINE_END);
 
         // create Clear button that is actionable
         clearButton = new JButton("Clear");
         clearButton.setPreferredSize(new Dimension(320, 30));
         clearButton.addActionListener(this);
         // add Clear button to bottom of display
-        pane.add(clearButton, BorderLayout.PAGE_END);
+        this.add(clearButton, BorderLayout.PAGE_END);
     }
 
     // update the display depending on clicked button(s)
@@ -70,6 +72,12 @@ public class Keypad extends JPanel implements ActionListener {
             }
         }
 
+        if (additionalText == "#") {
+            ActionEvent e2 = e;
+            e2.setSource(display);
+            listener.actionPerformed(e2);
+        }
+
 
         // clear display if "Clear" button is clicked
         if (e.getSource().equals(clearButton)) {
@@ -82,16 +90,9 @@ public class Keypad extends JPanel implements ActionListener {
         display.setText(textThere + additionalText);
     }
 
-    public static void main(String[] args) {
-
-        //create and set up the window.
-        JFrame frame = new JFrame("Numeric Keyboard");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //set up the content pane.
-        frame.getContentPane().add(new Keypad(frame));
-
-        frame.pack();
-        frame.setVisible(true);
+    public void setListener(ActionListener l) {
+        this.listener = l;
     }
+
+
 }
