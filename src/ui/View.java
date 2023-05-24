@@ -17,8 +17,10 @@ public class View {
         this.loginView = new JPanel();
         this.mainView = new JPanel(new BorderLayout());
 
+        this.mainView.add(new TablesView(), BorderLayout.CENTER);
+        this.mainView.add(new MenuView(), BorderLayout.LINE_START);
 
-
+        window.add(this.mainView);
         window.setVisible(true);
     }
 }
