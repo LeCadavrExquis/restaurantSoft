@@ -7,12 +7,19 @@ public class Dania
     public double price = 0;
     public String type = "undefined";
 
-    Dania(double price, String type)
+    public int id;
+
+    Dania()
+    {
+
+    }
+    Dania(double price, String type, int id)
     {
         try
         {
             this.type = type;
             this.price = price;
+            this.id = id;
         }
         catch (NumberFormatException ex)
         {
@@ -20,6 +27,5 @@ public class Dania
         }
 
     }
-
 
 }
