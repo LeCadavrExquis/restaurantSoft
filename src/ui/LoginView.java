@@ -23,3 +23,13 @@ public class LoginView extends JPanel {
         this.add(new JButton("*"));
     }
 }
+//    private void numberButtonActionPerformed(ActionEvent evt) {
+//
+//        String currentPassword = ((JButton) evt.getSource()).getText();
+//
+//        passwordField.requestFocus();
+//        passwordField.setText(passwordField.getText() + currentPassword);
+//        if (Arrays.equals(pass, passwordField.getPassword())) {
+//            System.out.println("Correct");
+//        }
+//    }
