@@ -1,17 +1,18 @@
 package model;
 
-import java.util.ArrayList;
+
 
 public class Zamowienie
 {
     public int table;
 
+    public int id;
+
     public int hour;
     public int minute;
     public int second;
 
-    public ArrayList<Dania> danie;
-    Zamowienie(int table, int hour, int minute, int second)
+    Zamowienie(int table, int hour, int minute, int second, int id)
     {
 
         try
@@ -35,17 +36,6 @@ public class Zamowienie
             System.out.println("Wrong Data");
         }
 
-    }
-
-    void addToOrder(double price, String type, int id)
-    {
-        danie.add(new Dania());
-
-    }
-
-    void rmFromOrder(int id)
-    {
-        danie.remove(id);
     }
 
 }
