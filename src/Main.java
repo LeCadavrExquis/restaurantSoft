@@ -1,5 +1,3 @@
-import ui.Window;
-
 import javax.swing.*;
 
 public class Main {

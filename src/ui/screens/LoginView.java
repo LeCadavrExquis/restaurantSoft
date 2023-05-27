@@ -1,35 +1,71 @@
 package ui.screens;
 
 import ui.Destination;
+import ui.components.Keypad;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.function.Function;
 
-public class LoginView extends JPanel implements Destination {
+public class LoginView extends JPanel implements ActionListener, Destination {
+
+    private JLabel textField;
+    private Keypad keypad;
+
+    private JButton logInBtn;
+    private JButton clearBtn;
 
     public ActionListener onLogIn;
     public LoginView() {
-        GridLayout layout = new GridLayout(4,3);
+        this.textField = new JLabel("");
 
-        this.setLayout(layout);
+        this.keypad = new Keypad();
+        this.keypad.setActionListener(this);
 
-        this.add(new JButton("1"));
-        this.add(new JButton("2"));
-        this.add(new JButton("3"));
-        this.add(new JButton("4"));
-        this.add(new JButton("5"));
-        this.add(new JButton("6"));
-        this.add(new JButton("7"));
-        this.add(new JButton("8"));
-        this.add(new JButton("9"));
-        this.add(new JButton("#"));
-        this.add(new JButton("0"));
-        this.add(new JButton("*"));
+        this.logInBtn = new JButton("Log in");
+        this.logInBtn.addActionListener(this);
+        this.logInBtn.setActionCommand("LOGIN");
+
+        this.clearBtn = new JButton("Clear");
+        this.clearBtn.addActionListener(this);
+        this.clearBtn.setActionCommand("CLEAR");
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(this.textField);
+        this.add(this.keypad);
+        this.add(this.clearBtn);
+        this.add(this.logInBtn);
+
+    }
+
+    public void setOnLogIn(ActionListener listener) {
+        this.onLogIn = listener;
     }
 
     @Override
     public String getDestinationName() {
         return "LOGIN";
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String action = e.getActionCommand();
+
+        if (action.equals("KEYPAD")) {
+            JButton b = (JButton) e.getSource();
+            String newText = this.textField.getText() + b.getText();
+
+            this.textField.setText(newText);
+        } else if (action.equals("CLEAR")) {
+            // TODO: Ustaw zawartość 'textField' na ""
+
+        } else if (action.equals("LOGIN")) {
+            ActionEvent newEvent = e;
+            newEvent.setSource(textField);
+
+            this.onLogIn.actionPerformed(newEvent);
+        }
     }
 }
