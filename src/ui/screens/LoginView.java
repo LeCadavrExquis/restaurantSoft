@@ -1,9 +1,14 @@
-package ui;
+package ui.screens;
+
+import ui.Destination;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
-public class LoginView extends JPanel {
+public class LoginView extends JPanel implements Destination {
+
+    public ActionListener onLogIn;
     public LoginView() {
         GridLayout layout = new GridLayout(4,3);
 
@@ -22,14 +27,9 @@ public class LoginView extends JPanel {
         this.add(new JButton("0"));
         this.add(new JButton("*"));
     }
+
+    @Override
+    public String getDestinationName() {
+        return "LOGIN";
+    }
 }
-//    private void numberButtonActionPerformed(ActionEvent evt) {
-//
-//        String currentPassword = ((JButton) evt.getSource()).getText();
-//
-//        passwordField.requestFocus();
-//        passwordField.setText(passwordField.getText() + currentPassword);
-//        if (Arrays.equals(pass, passwordField.getPassword())) {
-//            System.out.println("Correct");
-//        }
-//    }

@@ -1,10 +1,10 @@
-package ui;
+package ui.screens;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class TablesView extends JPanel {
-    public TablesView() {
+public class TablesBoard extends JPanel {
+    public TablesBoard() {
         GridLayout layout = new GridLayout(4,4);
         this.setLayout(layout);
 

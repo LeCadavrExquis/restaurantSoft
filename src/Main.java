@@ -1,13 +1,15 @@
-import ui.View;
+import ui.Window;
+
+import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
 
-        View view = new View();
-        Controller controller = new Controller(view);
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                Window view = new Window("Restaurant soft");
+                Controller controller = new Controller(view);
+            }
+        });
     }
 }
-
-
-//Aleksy

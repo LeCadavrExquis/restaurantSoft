@@ -1,6 +1,6 @@
 package model;
 
-class User {
+public class User {
     private int id;
     private int password;
     private boolean isAdmin;
