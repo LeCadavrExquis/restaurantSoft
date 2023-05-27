@@ -6,17 +6,16 @@ public class Dania
 {
     public double price = 0;
     public String type = "undefined";
-
-    public Zamowienie order;
+    public int orderId;
     public int id;
-    Dania(Zamowienie order,double price, String type,int id)
+    Dania(int orderId, double price, String type, int id)
     {
         try
         {
-            this.order = order;
+            this.orderId = orderId;
             this.type = type;
             this.price = price;
-            this.id = order.id;
+            this.id = id;
         }
         catch (NumberFormatException ex)
         {

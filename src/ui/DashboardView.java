@@ -1,13 +1,13 @@
-package ui.screens;
+package ui;
 
 import model.User;
-import ui.Destination;
 import ui.components.TablesBoard;
+import ui.components.DashboardSidebar;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class DashboardView extends JPanel implements Destination {
+public class DashboardView extends JPanel {
     protected DashboardSidebar dashboardSidebar;
     protected TablesBoard tablesBoard;
     protected User currentUser;
@@ -20,10 +20,5 @@ public class DashboardView extends JPanel implements Destination {
         this.setLayout(new BorderLayout());
         this.add(this.tablesBoard, BorderLayout.CENTER);
         this.add(this.dashboardSidebar, BorderLayout.LINE_START);
-    }
-
-    @Override
-    public String getDestinationName() {
-        return "DASHBOARD";
     }
 }

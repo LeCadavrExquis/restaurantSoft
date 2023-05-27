@@ -5,10 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class Keypad extends JPanel {
+    private int buttonCount = 12;
     public Keypad() {
-        GridLayout layout = new GridLayout(4,3);
+        GridLayout layout = new GridLayout(4,3, 24, 24);
 
         this.setLayout(layout);
+        this.setPreferredSize(new Dimension(400, 400));
 
         this.add(new JButton("1")); // 0
         this.add(new JButton("2")); // 1

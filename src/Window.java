@@ -1,7 +1,7 @@
 import model.User;
-import ui.screens.AdminView;
-import ui.screens.DashboardView;
-import ui.screens.LoginView;
+import ui.AdminView;
+import ui.DashboardView;
+import ui.LoginView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -9,45 +9,21 @@ import java.awt.event.ActionListener;
 
 public class Window extends JFrame implements ActionListener {
     private JPanel mainView;
-    private LoginView loginView;
-    private DashboardView dashboardView;
-    private AdminView adminView;
 
     private ControllerActions actions;
 
     public Window(String title) {
-        // wołamy construktor klasy JFrame
         super(title);
+        this.setSize(1365, 760);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.mainView = new JPanel();
-
-        // pola tej klasy (Window)
-        this.loginView = new LoginView();
-        this.loginView.setOnLogIn(this);
-        this.mainView.add(this.loginView);
-
-        // pola/metody klasy, po której dziedziczymy (JFrame)
-        this.setSize(800, 600);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        LoginView loginView = new LoginView();
+        loginView.setOnLogIn(this);
+        this.mainView.add(loginView);
         this.add(this.mainView);
+
         this.setVisible(true);
-    }
-
-    public void setControllerActions(ControllerActions actions) {
-        this.actions = actions;
-    }
-
-    public void goToDashboard(User user) {
-        this.mainView.removeAll();
-        if (user.isAdmin()) {
-            this.adminView = new AdminView(user);
-            this.mainView.add(this.adminView);
-        } else {
-            this.dashboardView = new DashboardView(user);
-            this.mainView.add(this.dashboardView);
-        }
-        this.revalidate();
-        this.repaint();
     }
 
     @Override
@@ -56,6 +32,7 @@ public class Window extends JFrame implements ActionListener {
 
         if (action.equals("LOGIN")) {
             JLabel textField = (JLabel) e.getSource();
+
             String text = textField.getText();
             String[] splitedText = text.split("#");
 
@@ -65,8 +42,30 @@ public class Window extends JFrame implements ActionListener {
             boolean isLogInSuccessfull = this.actions.logIn(id, password);
 
             if (!isLogInSuccessfull) {
-                // TODO: pokoloruj pole z loginem i hasłem na czerwono jeżeli są nieprawidłowe
+                ((LoginView)this.mainView.getComponent(0)).drawError();
             }
         }
+    }
+
+    public void goToDashboard(User user) {
+        this.mainView.removeAll();
+        if (user.isAdmin()) {
+            this.mainView.add(new AdminView());
+        } else {
+            this.mainView.add(new DashboardView(user));
+        }
+        this.revalidate();
+        this.repaint();
+    }
+
+    public void goToLogin() {
+        this.mainView.removeAll();
+        this.mainView.add(new LoginView());
+        this.revalidate();
+        this.repaint();
+    }
+
+    public void setControllerActions(ControllerActions actions) {
+        this.actions = actions;
     }
 }

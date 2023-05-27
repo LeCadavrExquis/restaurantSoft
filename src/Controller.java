@@ -1,12 +1,15 @@
 import model.User;
+import model.repository.OrderRepository;
+import model.repository.PaymentRepository;
+import model.repository.PlateRepository;
 import model.repository.UserRepository;
-
-import java.io.File;
 
 public class Controller implements ControllerActions {
     private Window window;
-    private User currentUser;
     private UserRepository userRepository;
+    private PaymentRepository paymentRepository;
+    private PlateRepository plateRepository;
+    private OrderRepository orderRepository;
 
     public Controller(Window window) {
         this.window = window;
@@ -25,7 +28,6 @@ public class Controller implements ControllerActions {
         }
 
         if (user.getPassword() == password) {
-            this.currentUser = user;
             this.window.goToDashboard(user);
             return true;
         } else {
