@@ -17,7 +17,9 @@ public class DashboardView extends JPanel {
         this.tablesBoard = new TablesBoard();
         this.currentUser = user;
 
-        this.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout(24, 24));
+        // TODO: Dodaj pasek u góry okna z nazwą programu
+        this.add(new JPanel(), BorderLayout.NORTH);
         this.add(this.tablesBoard, BorderLayout.CENTER);
         this.add(this.dashboardSidebar, BorderLayout.LINE_START);
     }

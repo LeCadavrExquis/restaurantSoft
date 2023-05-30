@@ -12,6 +12,9 @@ public class UserRepository implements Repository<User> {
     public UserRepository() {
         // TODO load repository from file
         File usersCsv = new File("./data/users.csv");
+
+        users.add(new User(1, 1234, false));
+        users.add(new User(2, 4321, true));
     }
 
     @Override

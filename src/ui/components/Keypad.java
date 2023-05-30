@@ -23,7 +23,7 @@ public class Keypad extends JPanel {
         this.add(new JButton("9"));
         this.add(new JButton("#"));
         this.add(new JButton("0")); // 10
-        this.add(new JButton("*")); // 11
+        this.add(new JButton(".")); // 11
     }
 
     public void setActionListener(ActionListener l) {
