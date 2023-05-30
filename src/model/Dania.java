@@ -8,7 +8,7 @@ public class Dania
     public String type = "undefined";
     public int orderId;
     public int id;
-    Dania(int orderId, double price, String type, int id)
+    public Dania(int orderId, double price, String type, int id)
     {
         try
         {

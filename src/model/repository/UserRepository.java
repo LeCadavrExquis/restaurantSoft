@@ -2,50 +2,25 @@ package model.repository;
 
 import model.User;
 
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class UserRepository implements Repository<User> {
 
     private ArrayList<User> users = new ArrayList<User>();
+
     public UserRepository() {
+        // TODO load repository from file
         File usersCsv = new File("./data/users.csv");
-        usersCsv.mkdirs();
-        try {
-            Scanner scanner = new Scanner(usersCsv);
-
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] splited = line.split(",");
-
-                int id = Integer.parseInt(splited[0]);
-                int password = Integer.parseInt(splited[1]);
-                boolean isAdmin = Boolean.parseBoolean(splited[2]);
-
-                User readUser = new User(id, password, isAdmin);
-
-                this.users.add(readUser);
-            }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
     public void add(User newUser) {
+        // TODO: sprawdź czy id obiektu plate is unikalne (nie ma go w liście plates)
+
         this.users.add(newUser);
 
-        try {
-            FileWriter fw = new FileWriter("./data/users.csv", true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter out = new PrintWriter(bw);
-
-            out.println(newUser.getId() + "," + newUser.getPassword() + "," + newUser.isAdmin());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        // TODO: zapisz płatność do pliku 'plates.csv'
     }
 
     @Override
@@ -59,7 +34,7 @@ public class UserRepository implements Repository<User> {
     }
 
     @Override
-    public void update(int id) {
+    public void update(User user) {
         // not implemented
     }
 

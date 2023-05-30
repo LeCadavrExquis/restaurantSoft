@@ -12,7 +12,7 @@ public class Zamowienie
     public int minute;
     public int second;
 
-    Zamowienie(int table, int hour, int minute, int second, int id)
+    public Zamowienie(int table, int hour, int minute, int second, int id)
     {
 
         try

@@ -1,6 +1,5 @@
 package model.repository;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 public interface Repository<T> {
     public void add(T object);
     public T get(int id);
-    public void update(int id);
+    public void update(T object);
     public void delete(int id);
 
     public ArrayList<T> getAll();
