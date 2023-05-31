@@ -50,8 +50,8 @@ public class Window extends JFrame implements ActionListener {
         if (actionCommand.equals("ORDER")) {
             // TODO pobierz potrzebne dane z ui i wywołaj funkcję controllera 'order'
             int currentTable = ((DashboardView)this.mainView).getCurrentTable();
-            //ArrayList<Dania> orderedPlates = ...
-            //this.actions.order(currentTable, orderedPlates);
+            ArrayList<Dania> orderedPlates = ((DashboardView) this.mainView).getOrderedPlates();
+            this.actions.order(currentTable, orderedPlates);
             System.out.println("elko");
         }
         if (actionCommand.equals("PAY")) {
