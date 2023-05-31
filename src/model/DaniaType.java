@@ -6,8 +6,8 @@ public enum DaniaType {
     PASTA("makaron", 27),
     PIEROGI("pierogi", 25.0),
     WODA("woda",5.0),
-    NALESNIK ("nalesnik", 17.5);
-
+    NALESNIK ("nalesnik", 17.5),
+    JAJECZNICA("jajecznica", 13.0);
     public String name;
     public double price;
 
