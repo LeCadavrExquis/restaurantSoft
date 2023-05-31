@@ -23,6 +23,9 @@ public class Controller implements ControllerActions {
         this.window.setControllerActions(this);
 
         this.userRepository = new UserRepository();
+        this.userRepository.add(new User(1,1234,false));
+        this.orderRepository = new OrderRepository();
+        this.orderRepository.add(new Zamowienie(1,1,1,1,1));
     }
 
     @Override

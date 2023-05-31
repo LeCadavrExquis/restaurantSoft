@@ -45,6 +45,7 @@ public class UserRepository implements Repository<User> {
                 BufferedWriter bw = new BufferedWriter(fw);
                 PrintWriter out = new PrintWriter(bw);
                 out.println(newUser.getId() + "," + newUser.getPassword() + "," + newUser.isAdmin());
+                out.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

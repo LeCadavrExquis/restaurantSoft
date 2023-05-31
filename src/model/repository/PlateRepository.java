@@ -40,6 +40,7 @@ public class PlateRepository implements Repository<Dania> {
         PrintWriter out = new PrintWriter(bw);
 
         out.println(plate.id);
+        out.close();
         // TODO: zapisz płatność do pliku 'plates.csv'
     }
 
