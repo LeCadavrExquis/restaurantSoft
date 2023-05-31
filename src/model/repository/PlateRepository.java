@@ -2,7 +2,7 @@ package model.repository;
 
 import model.Dania;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 
 public class PlateRepository implements Repository<Dania> {
@@ -22,9 +22,24 @@ public class PlateRepository implements Repository<Dania> {
     @Override
     public void add(Dania plate) {
         // TODO: sprawdź czy id obiektu plate is unikalne (nie ma go w liście plates)
+        for (int i = 0; i < plates.size(); i++) {
+            if (plate.id == plates.get(i).id) {
 
-        this.plates.add(plate);
+            } else {
+                break;
+            }
+        }
+        plates.add(plate);
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter("./data/plates.csv", true);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter out = new PrintWriter(bw);
 
+        out.println(plate.id);
         // TODO: zapisz płatność do pliku 'plates.csv'
     }
 

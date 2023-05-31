@@ -26,6 +26,7 @@ public class Zamowienie
             }
             else
             {
+                this.id = id;
                 this. hour = hour;
                 this.minute = minute;
                 this.second = second;
