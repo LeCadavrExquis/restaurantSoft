@@ -1,9 +1,11 @@
 package model.repository;
 
 import model.Dania;
+import model.User;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PlateRepository implements Repository<Dania> {
     private ArrayList<Dania> plates = new ArrayList<Dania>();
@@ -11,6 +13,29 @@ public class PlateRepository implements Repository<Dania> {
     public PlateRepository() {
         // TODO load repository from file
         File plateCsv = new File("./data/plates.csv");
+
+        try {
+            Scanner scanner = new Scanner(plateCsv);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] splited = line.split(",");
+
+                int orderId = Integer.parseInt(splited[0]);
+                String type = splited[1];
+                double price = Double.parseDouble(splited[2]);
+                int id = Integer.parseInt(splited[2]);
+
+                Dania plate = new Dania( orderId,price,type,id);
+
+                this.plates.add(plate);
+
+
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
         this.plates.add(new Dania(88, 30.0, "Pizza", 2));
         this.plates.add(new Dania(88, 5.5, "Napój", 3));
@@ -40,6 +65,7 @@ public class PlateRepository implements Repository<Dania> {
         PrintWriter out = new PrintWriter(bw);
 
         out.println(plate.id);
+        out.close();
         // TODO: zapisz płatność do pliku 'plates.csv'
     }
 
