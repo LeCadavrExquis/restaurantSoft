@@ -40,12 +40,16 @@ public class DashboardView extends JPanel implements ActionListener {
         return dashboardSidebar.getCurrentTable();
     }
 
+    public ArrayList<Dania> getOrderedPlates() {
+        return this.dashboardSidebar.getOrderedPlates();
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("TABLE_SELECTED")) {
-            int table = Integer.parseInt(((JButton)e.getSource()).getText());
+            JButton btn = (JButton) e.getSource();
+            String newTableNr = btn.getText();
+            int table = Integer.parseInt(newTableNr);
             this.dashboardSidebar.setCurrentTable(table);
-            //this.dashboardSidebar.setCurrenPlates();
         }
     }
 }
