@@ -12,7 +12,7 @@ public class LoginView extends JPanel implements ActionListener {
 
     private JLabel textField;
     private Keypad keypad;
-    private JButton logInBtn;
+    private JButton logInBtn ;
     private JButton clearBtn;
 
     public ActionListener onLogIn;
@@ -30,11 +30,17 @@ public class LoginView extends JPanel implements ActionListener {
         this.keypad.setActionListener(this);
 
         // TODO: trochę zwiekszyć przyciski
+
         this.logInBtn = new JButton("Log in");
+        this.logInBtn.setFont(new Font("Serif", Font.ITALIC, 36));
+        this.logInBtn.setPreferredSize(new Dimension(150,75));
         this.logInBtn.addActionListener(this);
         this.logInBtn.setActionCommand("LOGIN");
 
+
         this.clearBtn = new JButton("Clear");
+        this.clearBtn.setFont(new Font("Serif", Font.ITALIC, 36));
+        this.clearBtn.setPreferredSize(new Dimension(150,75));
         this.clearBtn.addActionListener(this);
         this.clearBtn.setActionCommand("CLEAR");
 
