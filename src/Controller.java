@@ -1,8 +1,15 @@
+import model.Dania;
+import model.Platnosc;
 import model.User;
+import model.Zamowienie;
 import model.repository.OrderRepository;
 import model.repository.PaymentRepository;
 import model.repository.PlateRepository;
 import model.repository.UserRepository;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 public class Controller implements ControllerActions {
     private Window window;
@@ -33,5 +40,20 @@ public class Controller implements ControllerActions {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public void order(int table, ArrayList<Dania> plates) {
+        Date date = new Date();
+        int orderId = new Random().nextInt();
+        //Zamowienie order = new Zamowienie(table, date, orderId);
+        // TODO: dodaj zamówienie do OrderRepository
+        // TODO: dodaj zamówione dania do PlatesRepository
+    }
+
+    @Override
+    public void pay(boolean byCard, Zamowienie order) {
+        int id = new Random().nextInt();
+        Platnosc payment = new Platnosc(id, true, byCard, order.id);
     }
 }

@@ -2,6 +2,7 @@ package ui.components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class TablesBoard extends JPanel {
     public TablesBoard() {
@@ -18,7 +19,16 @@ public class TablesBoard extends JPanel {
             this.add(button);
             JButton button2 = new JButton(btnName);
             button2.setBackground(Color.GREEN);
+            button2.setActionCommand("TABLE_SELECTED");
             this.add(button2);
+        }
+    }
+
+    public void setActionListener(ActionListener listener) {
+        Component[] components = this.getComponents();
+
+        for (int i = 0; i < components.length; i++) {
+            ((JButton)components[i]).addActionListener(listener);
         }
     }
 }

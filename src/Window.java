@@ -1,3 +1,4 @@
+import model.Dania;
 import model.User;
 import ui.AdminView;
 import ui.DashboardView;
@@ -6,6 +7,7 @@ import ui.LoginView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Window extends JFrame implements ActionListener {
     private JPanel mainView;
@@ -28,9 +30,9 @@ public class Window extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String action = e.getActionCommand();
+        String actionCommand = e.getActionCommand();
 
-        if (action.equals("LOGIN")) {
+        if (actionCommand.equals("LOGIN")) {
             JLabel textField = (JLabel) e.getSource();
 
             String text = textField.getText();
@@ -45,6 +47,15 @@ public class Window extends JFrame implements ActionListener {
                 ((LoginView)this.mainView.getComponent(0)).drawError();
             }
         }
+        if (actionCommand.equals("ORDER")) {
+            // TODO pobierz potrzebne dane z ui i wywołaj funkcję controllera 'order'
+            int currentTable = ((DashboardView)this.mainView).getCurrentTable();
+            //ArrayList<Dania> orderedPlates = ...
+            //this.actions.order(currentTable, orderedPlates);
+        }
+        if (actionCommand.equals("PAY")) {
+            //this.actions.pay();
+        }
     }
 
     public void goToDashboard(User user) {
@@ -52,6 +63,8 @@ public class Window extends JFrame implements ActionListener {
         if (user.isAdmin()) {
             this.mainView.add(new AdminView());
         } else {
+            DashboardView dashboard = new DashboardView(user);
+            dashboard.setControllerActionListener(this);
             this.mainView.add(new DashboardView(user));
         }
         this.revalidate();
