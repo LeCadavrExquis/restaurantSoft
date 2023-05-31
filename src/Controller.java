@@ -22,6 +22,10 @@ public class Controller implements ControllerActions {
         this.window = window;
         this.window.setControllerActions(this);
 
+        this.userRepository = new UserRepository();
+        this.orderRepository = new OrderRepository();
+        this.paymentRepository = new PaymentRepository();
+        this.plateRepository = new PlateRepository();
     }
 
     @Override
@@ -54,5 +58,15 @@ public class Controller implements ControllerActions {
     public void pay(boolean byCard, Zamowienie order) {
         int id = new Random().nextInt();
         Platnosc payment = new Platnosc(id, true, byCard, order.id);
+    }
+
+    @Override
+    public ArrayList<Dania> getPlatesForOrder(int orderId) {
+        Zamowienie order = this.orderRepository.get(orderId);
+        ArrayList<Dania> plates = this.plateRepository.getAll();
+
+        // TODO: zwróć tylko dania, które należą do tego zamówienia
+
+        return plates;
     }
 }
