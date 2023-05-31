@@ -29,8 +29,6 @@ public class LoginView extends JPanel implements ActionListener {
         this.keypad = new Keypad();
         this.keypad.setActionListener(this);
 
-        // TODO: trochę zwiekszyć przyciski
-
         this.logInBtn = new JButton("Log in");
         this.logInBtn.setFont(new Font("Serif", Font.ITALIC, 36));
         this.logInBtn.setPreferredSize(new Dimension(150,75));
@@ -74,7 +72,6 @@ public class LoginView extends JPanel implements ActionListener {
 
             this.textField.setText(newText);
         } else if (action.equals("CLEAR")) {
-            // TODO: Ustaw zawartość 'textField' na ""
             this.textField.setText("");
 
         } else if (action.equals("LOGIN")) {
