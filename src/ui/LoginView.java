@@ -83,7 +83,9 @@ public class LoginView extends JPanel implements ActionListener {
     }
 
     public void drawError() {
-        // TODO: pokoloruj pole tekstowe na czerwono, żeby zasygnalizować błąd
+        this.textField.setBorder(new LineBorder(new Color(220, 15, 15)));
+        this.revalidate();
+        this.repaint();
     }
 
     private boolean checkIfValidInput(String input) {
