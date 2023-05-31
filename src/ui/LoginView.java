@@ -68,7 +68,6 @@ public class LoginView extends JPanel implements ActionListener {
 
             this.textField.setText(newText);
         } else if (action.equals("CLEAR")) {
-            // TODO: Ustaw zawartość 'textField' na ""
             this.textField.setText("");
 
         } else if (action.equals("LOGIN")) {
@@ -90,7 +89,14 @@ public class LoginView extends JPanel implements ActionListener {
     }
 
     private boolean checkIfValidInput(String input) {
-        // TODO: sprwdź czy dany tekst jest w formacie int#int (np. 5#1234)
-        return true;
+        String login = this.textField.getText();
+        String[] splited = login.split("#");
+        if((login.contains("#"))&&(splited[1].length()==4)) {
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 }
