@@ -3,21 +3,41 @@ package model.repository;
 import model.User;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class UserRepository implements Repository<User> {
 
     private ArrayList<User> users = new ArrayList<User>();
 
     public UserRepository() {
-        // TODO load repository from file
         File usersCsv = new File("./data/users.csv");
 
-        users.add(new User(1, 1234, false));
-        users.add(new User(2, 4321, true));
+        try {
+            Scanner scanner = new Scanner(usersCsv);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] splited = line.split(",");
+
+                int id = Integer.parseInt(splited[0]);
+                int password = Integer.parseInt(splited[1]);
+                boolean isAdmin = Boolean.parseBoolean(splited[2]);
+
+                User readUser = new User(id, password, isAdmin);
+
+                this.users.add(readUser);
+
+
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @Override
+        @Override
     public void add(User newUser) {
         // TODO: sprawdź czy id obiektu plate is unikalne (nie ma go w liście plates)
 
