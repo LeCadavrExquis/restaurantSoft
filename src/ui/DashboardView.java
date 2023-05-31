@@ -26,7 +26,7 @@ public class DashboardView extends JPanel implements ActionListener {
         this.currentUser = user;
 
         this.setLayout(new BorderLayout(24, 24));
-        // TODO: Dodaj pasek u góry okna z nazwą programu
+        this.add(new JLabel("Restauracja Soft wita!"), BorderLayout.PAGE_START);
         this.add(new JPanel(), BorderLayout.NORTH);
         this.add(this.tablesBoard, BorderLayout.CENTER);
         this.add(this.dashboardSidebar, BorderLayout.LINE_START);
@@ -40,12 +40,16 @@ public class DashboardView extends JPanel implements ActionListener {
         return dashboardSidebar.getCurrentTable();
     }
 
+    public ArrayList<Dania> getOrderedPlates() {
+        return this.dashboardSidebar.getOrderedPlates();
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("TABLE_SELECTED")) {
-            int table = Integer.parseInt(((JButton)e.getSource()).getText());
+            JButton btn = (JButton) e.getSource();
+            String newTableNr = btn.getText();
+            int table = Integer.parseInt(newTableNr);
             this.dashboardSidebar.setCurrentTable(table);
-            //this.dashboardSidebar.setCurrenPlates();
         }
     }
 }
