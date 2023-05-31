@@ -45,6 +45,7 @@ public class OrderRepository implements Repository<Zamowienie> {
             PrintWriter out = new PrintWriter(bw);
 
             out.println(newOrder.table + "," + newOrder.hour + "," + newOrder.minute + "," + newOrder.second + ", " + newOrder.id);
+            out.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

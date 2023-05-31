@@ -45,6 +45,7 @@ public class PaymentRepository implements Repository<Platnosc> {
             PrintWriter out = new PrintWriter(bw);
 
             out.println(nowaPlatnosc.id + "," + nowaPlatnosc.zatwierdzono + "," + nowaPlatnosc.czykarta + "," + nowaPlatnosc.orderid);
+            out.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

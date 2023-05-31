@@ -69,6 +69,7 @@ public class LoginView extends JPanel implements ActionListener {
             this.textField.setText(newText);
         } else if (action.equals("CLEAR")) {
             // TODO: Ustaw zawartość 'textField' na ""
+            this.textField.setText("");
 
         } else if (action.equals("LOGIN")) {
             if (this.checkIfValidInput(this.textField.getText())) {
