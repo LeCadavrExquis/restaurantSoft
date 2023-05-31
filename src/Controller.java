@@ -51,7 +51,9 @@ public class Controller implements ControllerActions {
         int orderId = new Random().nextInt();
         //Zamowienie order = new Zamowienie(table, date, orderId);
         // TODO: dodaj zamówienie do OrderRepository
+        OrderRepository newOrder = new OrderRepository();
         // TODO: dodaj zamówione dania do PlatesRepository
+        PlateRepository newPlate = new PlateRepository();
     }
 
     @Override
