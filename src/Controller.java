@@ -48,12 +48,19 @@ public class Controller implements ControllerActions {
     @Override
     public void order(int table, ArrayList<Dania> plates) {
         Date date = new Date();
+        int hours = date.getHours();
+        int minutes = date.getMinutes();
+        int seconds = date.getSeconds();
         int orderId = new Random().nextInt();
-        //Zamowienie order = new Zamowienie(table, date, orderId);
+        Zamowienie order = new Zamowienie(table,hours,minutes,seconds,orderId);
         // TODO: dodaj zamówienie do OrderRepository
-        OrderRepository newOrder = new OrderRepository();
+        this.orderRepository.add(order);
         // TODO: dodaj zamówione dania do PlatesRepository
-        PlateRepository newPlate = new PlateRepository();
+        for(Dania plate : plates)
+        {
+            this.plateRepository.add(plate);
+        }
+
     }
 
     @Override
