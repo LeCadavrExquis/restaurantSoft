@@ -52,6 +52,7 @@ public class Window extends JFrame implements ActionListener {
             int currentTable = ((DashboardView)this.mainView).getCurrentTable();
             //ArrayList<Dania> orderedPlates = ...
             //this.actions.order(currentTable, orderedPlates);
+            System.out.println("elko");
         }
         if (actionCommand.equals("PAY")) {
             //this.actions.pay();
