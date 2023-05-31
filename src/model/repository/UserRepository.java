@@ -2,8 +2,7 @@ package model.repository;
 
 import model.User;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -39,12 +38,17 @@ public class UserRepository implements Repository<User> {
 
         @Override
     public void add(User newUser) {
-        // TODO: sprawdź czy id obiektu plate is unikalne (nie ma go w liście plates)
+            this.users.add(newUser);
 
-        this.users.add(newUser);
-
-        // TODO: zapisz płatność do pliku 'plates.csv'
-    }
+            try {
+                FileWriter fw = new FileWriter("./data/users.csv", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter out = new PrintWriter(bw);
+                out.println(newUser.getId() + "," + newUser.getPassword() + "," + newUser.isAdmin());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     @Override
     public User get(int id) {
