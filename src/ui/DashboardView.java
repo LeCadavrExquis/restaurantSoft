@@ -45,6 +45,7 @@ public class DashboardView extends JPanel implements ActionListener {
         if (e.getActionCommand().equals("TABLE_SELECTED")) {
             int table = Integer.parseInt(((JButton)e.getSource()).getText());
             this.dashboardSidebar.setCurrentTable(table);
+            //this.dashboardSidebar.setCurrenPlates();
         }
     }
 }

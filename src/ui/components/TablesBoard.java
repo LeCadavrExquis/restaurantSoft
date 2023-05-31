@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 public class TablesBoard extends JPanel {
     public TablesBoard() {
 
-        this.setPreferredSize(new Dimension(600, 600));
+        this.setPreferredSize(new Dimension(400, 400));
         GridLayout layout = new GridLayout(4,4);
         this.setLayout(layout);
 
