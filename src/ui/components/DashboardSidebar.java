@@ -40,7 +40,7 @@ public class DashboardSidebar extends JPanel implements ActionListener {
         this.showOrderedPlates.add(new JLabel("Zamówione dania:"));
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setPreferredSize(new Dimension(600, 600));
+        this.setPreferredSize(new Dimension(400, 400));
 
         this.add(new JLabel("Aktualny stolik: "));
         this.add(this.currentTable);
@@ -62,6 +62,14 @@ public class DashboardSidebar extends JPanel implements ActionListener {
 
     public void setCurrentTable(int table) {
         this.currentTable.setText(String.valueOf(table));
+        this.revalidate();
+        this.repaint();
+    }
+
+    public void setCurrenPlates(ArrayList<Dania> plates) {
+        this.showOrderedPlates.removeAll();
+        // TODO: dodaj wszytkie dania
+        //for ()
         this.revalidate();
         this.repaint();
     }
@@ -94,12 +102,6 @@ public class DashboardSidebar extends JPanel implements ActionListener {
             this.showOrderedPlates.add(new JLabel(newPlate.type + " | " + newPlate.price + " pln"));
             this.revalidate();
             this.repaint();
-        }
-        if (e.getActionCommand().equals("ORDER")) {
-
-        }
-        if (e.getActionCommand().equals("PAY")) {
-
         }
     }
 }
