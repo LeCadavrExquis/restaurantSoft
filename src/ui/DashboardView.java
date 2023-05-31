@@ -26,7 +26,7 @@ public class DashboardView extends JPanel implements ActionListener {
         this.currentUser = user;
 
         this.setLayout(new BorderLayout(24, 24));
-        // TODO: Dodaj pasek u góry okna z nazwą programu
+        this.add(new JLabel("Restauracja Soft wita!"), BorderLayout.PAGE_START);
         this.add(new JPanel(), BorderLayout.NORTH);
         this.add(this.tablesBoard, BorderLayout.CENTER);
         this.add(this.dashboardSidebar, BorderLayout.LINE_START);
