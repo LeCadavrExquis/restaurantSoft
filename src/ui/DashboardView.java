@@ -15,16 +15,14 @@ import java.util.ArrayList;
 public class DashboardView extends JPanel implements ActionListener {
     private DashboardSidebar dashboardSidebar;
     private TablesBoard tablesBoard;
-    private User currentUser;
 
     private ActionListener listener;
 
-    public DashboardView(User user, ActionListener listener) {
+    public DashboardView(ActionListener listener) {
         this.dashboardSidebar = new DashboardSidebar();
         this.dashboardSidebar.setActionListener(this);
         this.tablesBoard = new TablesBoard();
         this.tablesBoard.setActionListener(this);
-        this.currentUser = user;
         this.listener = listener;
 
         this.setLayout(new BorderLayout(24, 24));
@@ -41,6 +39,11 @@ public class DashboardView extends JPanel implements ActionListener {
     public ArrayList<Dania> getOrderedPlates() {
         return this.dashboardSidebar.getOrderedPlates();
     }
+
+    public void setCurrentPlates(ArrayList<Dania> plates) {
+        this.dashboardSidebar.setCurrentPlates(plates);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
@@ -51,13 +54,11 @@ public class DashboardView extends JPanel implements ActionListener {
                 String newTableNr = btn.getText();
                 int table = Integer.parseInt(newTableNr);
                 this.dashboardSidebar.setCurrentTable(table);
-            case "ORDER":
-                e.setSource(this);
-                listener.actionPerformed(e);
+                this.listener.actionPerformed(e);
                 break;
-            case "PAY":
+            case "ORDER", "PAY":
                 e.setSource(this);
-                listener.actionPerformed(e);
+                this.listener.actionPerformed(e);
                 break;
         }
     }

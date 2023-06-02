@@ -2,6 +2,7 @@ package ui.components;
 
 import model.Dania;
 import model.DaniaType;
+import model.Util;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -16,20 +17,12 @@ public class DashboardSidebar extends JPanel implements ActionListener {
     private JButton addPaymentButton;
     private JButton addOrderButton;
 
-    public ArrayList<Dania> getOrderedPlates() {
-        return orderedPlates;
-    }
-
-    public void setOrderedPlates(ArrayList<Dania> orderedPlates) {
-        this.orderedPlates = orderedPlates;
-    }
-
     private ArrayList<Dania> orderedPlates;
     private JPanel showOrderedPlates;
     private int currentOrderId;
 
     public DashboardSidebar() {
-        this.currentOrderId = new Random().nextInt();
+        this.currentOrderId = Util.getId();
         this.orderedPlates = new ArrayList<Dania>();
 
         this.currentTable = new JLabel("1");
@@ -68,16 +61,19 @@ public class DashboardSidebar extends JPanel implements ActionListener {
         this.repaint();
     }
 
+    public int getCurrentTable() {
+        return Integer.parseInt(this.currentTable.getText());
+    }
+
     public void setCurrentPlates(ArrayList<Dania> plates) {
         this.showOrderedPlates.removeAll();
-        // TODO: dodaj wszytkie dania
-        //for ()
+        // TODO: dodaj wszytkie dania (JLabel)
         this.revalidate();
         this.repaint();
     }
 
-    public int getCurrentTable() {
-        return Integer.parseInt(this.currentTable.getText());
+    public ArrayList<Dania> getOrderedPlates() {
+        return orderedPlates;
     }
 
     public void setActionListener(ActionListener listener) {
@@ -88,7 +84,7 @@ public class DashboardSidebar extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("ADD_PLATE")) {
-            JButton btn = (JButton)e.getSource();
+            JButton btn = (JButton) e.getSource();
             DaniaType type = null;
             DaniaType[] plates = DaniaType.values();
 
@@ -98,7 +94,7 @@ public class DashboardSidebar extends JPanel implements ActionListener {
                 }
             }
 
-            Dania newPlate = new Dania(this.currentOrderId, type.price, type.name, new Random().nextInt());
+            Dania newPlate = new Dania(this.currentOrderId, type.price, type.name, Util.getId());
             this.orderedPlates.add(newPlate);
 
             this.showOrderedPlates.add(new JLabel(newPlate.type + " | " + newPlate.price + " pln"));

@@ -1,3 +1,4 @@
+import model.AdminStatistics;
 import model.Dania;
 import model.User;
 import ui.AdminView;
@@ -49,13 +50,21 @@ public class Window extends JFrame implements ActionListener {
                 }
                 break;
             case "ORDER":
-                // TODO pobierz potrzebne dane z ui i wywołaj funkcję controllera 'order'
                 DashboardView dashboard = (DashboardView)e.getSource();
                 int currentTable = dashboard.getCurrentTable();
                 ArrayList<Dania> orderedPlates = dashboard.getOrderedPlates();
                 this.actions.order(currentTable, orderedPlates);
                 break;
             case "PAY":
+
+                //this.actions.pay();
+                break;
+            case "TABLE_SELECTED":
+                JButton btn = (JButton) e.getSource();
+                String newTableNr = btn.getText();
+                int table = Integer.parseInt(newTableNr);
+                ArrayList<Dania> platesForTable = this.actions.getPlatesForTable(table);
+                ((DashboardView)this.mainView.getComponent(0)).setCurrentPlates(platesForTable);
                 break;
         }
     }
@@ -63,9 +72,10 @@ public class Window extends JFrame implements ActionListener {
     public void goToDashboard(User user) {
         this.mainView.removeAll();
         if (user.isAdmin()) {
-            this.mainView.add(new AdminView());
+            AdminStatistics stats = this.actions.getStats();
+            this.mainView.add(new AdminView(stats));
         } else {
-            DashboardView dashboard = new DashboardView(user, this);
+            DashboardView dashboard = new DashboardView(this);
             this.mainView.add(dashboard);
         }
         this.revalidate();

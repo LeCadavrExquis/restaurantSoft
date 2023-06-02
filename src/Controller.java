@@ -1,7 +1,4 @@
-import model.Dania;
-import model.Platnosc;
-import model.User;
-import model.Zamowienie;
+import model.*;
 import model.repository.OrderRepository;
 import model.repository.PaymentRepository;
 import model.repository.PlateRepository;
@@ -53,7 +50,7 @@ public class Controller implements ControllerActions {
         int hours = date.getHours();
         int minutes = date.getMinutes();
         int seconds = date.getSeconds();
-        int orderId = new Random().nextInt();
+        int orderId = Util.getId();
         Zamowienie order = new Zamowienie(table,hours,minutes,seconds,orderId,this.currentUser.getId());
 
         this.orderRepository.add(order);
@@ -65,18 +62,25 @@ public class Controller implements ControllerActions {
     }
 
     @Override
-    public void pay(boolean byCard, Zamowienie order) {
-        int id = new Random().nextInt();
-        Platnosc payment = new Platnosc(id, true, byCard, order.id);
+    public void pay(int table, boolean byCard) {
+        int id = Util.getId();
+        //TODO: znajdź zamówienie dla podanego stolika
+        //Platnosc payment = new Platnosc(id, true, byCard, order.id);
     }
 
     @Override
-    public ArrayList<Dania> getPlatesForOrder(int orderId) {
-        Zamowienie order = this.orderRepository.get(orderId);
+    public ArrayList<Dania> getPlatesForTable(int table) {
+        // TODO: znajdź nieopłacone zamówienie dla danego stolika
+        //this.orderRepository.getAll()
         ArrayList<Dania> plates = this.plateRepository.getAll();
-
         // TODO: zwróć tylko dania, które należą do tego zamówienia
 
         return plates;
+    }
+
+    @Override
+    public AdminStatistics getStats() {
+        // TODO: oblicz statystyki dla panelu admina
+        return null;
     }
 }

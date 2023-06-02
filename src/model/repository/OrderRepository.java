@@ -41,7 +41,7 @@ public class OrderRepository implements Repository<Zamowienie> {
         this.orders.add(newOrder);
 
         try {
-            FileWriter fw = new FileWriter("./data/payments.csv", true);
+            FileWriter fw = new FileWriter("./data/orders.csv", true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw);
 
