@@ -12,17 +12,18 @@ public class LoginView extends JPanel implements ActionListener {
 
     private JLabel textField;
     private Keypad keypad;
-    private JButton logInBtn ;
+    private JButton logInBtn;
     private JButton clearBtn;
 
     public ActionListener onLogIn;
+
     public LoginView() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setPreferredSize(new Dimension(600, 600));
 
         this.textField = new JLabel("");
-        this.textField.setPreferredSize(new Dimension(400, 100));
-        this.textField.setBorder(new LineBorder(new Color(1,1,1)));
+        this.textField.setPreferredSize(new Dimension(400, 50));
+        this.textField.setBorder(new LineBorder(new Color(1, 1, 1)));
         this.textField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 24));
         this.textField.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -31,14 +32,14 @@ public class LoginView extends JPanel implements ActionListener {
 
         this.logInBtn = new JButton("Log in");
         this.logInBtn.setFont(new Font("Serif", Font.ITALIC, 36));
-        this.logInBtn.setPreferredSize(new Dimension(150,75));
+        this.logInBtn.setPreferredSize(new Dimension(150, 75));
         this.logInBtn.addActionListener(this);
         this.logInBtn.setActionCommand("LOGIN");
 
 
         this.clearBtn = new JButton("Clear");
         this.clearBtn.setFont(new Font("Serif", Font.ITALIC, 36));
-        this.clearBtn.setPreferredSize(new Dimension(150,75));
+        this.clearBtn.setPreferredSize(new Dimension(150, 75));
         this.clearBtn.addActionListener(this);
         this.clearBtn.setActionCommand("CLEAR");
 
@@ -66,23 +67,26 @@ public class LoginView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
 
-        if (action.equals("KEYPAD")) {
-            JButton b = (JButton) e.getSource();
-            String newText = this.textField.getText() + b.getText();
+        switch (action) {
+            case "KEYPRESS":
+                JButton b = (JButton) e.getSource();
+                String newText = this.textField.getText() + b.getText();
 
-            this.textField.setText(newText);
-        } else if (action.equals("CLEAR")) {
-            this.textField.setText("");
+                this.textField.setText(newText);
+                break;
+            case "CLEAR":
+                this.textField.setText("");
+                break;
+            case "LOGIN":
+                if (this.checkIfValidInput(this.textField.getText())) {
+                    ActionEvent newEvent = e;
+                    newEvent.setSource(textField);
 
-        } else if (action.equals("LOGIN")) {
-            if (this.checkIfValidInput(this.textField.getText())) {
-                ActionEvent newEvent = e;
-                newEvent.setSource(textField);
-
-                this.onLogIn.actionPerformed(newEvent);
-            } else {
-                this.drawError();
-            }
+                    this.onLogIn.actionPerformed(newEvent);
+                } else {
+                    this.drawError();
+                }
+                break;
         }
     }
 
@@ -95,12 +99,10 @@ public class LoginView extends JPanel implements ActionListener {
     private boolean checkIfValidInput(String input) {
         String login = this.textField.getText();
         String[] splited = login.split("#");
-        if((login.contains("#"))&&(splited[1].length()==4)) {
+        if (login.contains("#") && (splited[1].length() == 4)) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
-
     }
 }
