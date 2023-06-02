@@ -34,7 +34,9 @@ public class DashboardSidebar extends JPanel implements ActionListener {
 
         this.currentTable = new JLabel("1");
         this.addPaymentButton = new JButton("Zapłać za stolik");
+        this.addPaymentButton.setActionCommand("PAY");
         this.addOrderButton = new JButton("Złóż zamówienie");
+        this.addOrderButton.setActionCommand("ORDER");
         this.showOrderedPlates = new JPanel();
         this.showOrderedPlates.setLayout(new BoxLayout(this.showOrderedPlates, BoxLayout.Y_AXIS));
         this.showOrderedPlates.add(new JLabel("Zamówione dania:"));
@@ -66,7 +68,7 @@ public class DashboardSidebar extends JPanel implements ActionListener {
         this.repaint();
     }
 
-    public void setCurrenPlates(ArrayList<Dania> plates) {
+    public void setCurrentPlates(ArrayList<Dania> plates) {
         this.showOrderedPlates.removeAll();
         // TODO: dodaj wszytkie dania
         //for ()

@@ -24,8 +24,9 @@ public class OrderRepository implements Repository<Zamowienie> {
                 int minute = Integer.parseInt(splited[2]);
                 int second = Integer.parseInt(splited[3]);
                 int id = Integer.parseInt(splited[4]);
+                int user = Integer.parseInt(splited[5]);
 
-                Zamowienie readOrder = new Zamowienie(table, hour, minute, second, id);
+                Zamowienie readOrder = new Zamowienie(table, hour, minute, second, id, user);
 
                 this.orders.add(readOrder);
             }
@@ -44,7 +45,7 @@ public class OrderRepository implements Repository<Zamowienie> {
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter out = new PrintWriter(bw);
 
-            out.println(newOrder.table + "," + newOrder.hour + "," + newOrder.minute + "," + newOrder.second + ", " + newOrder.id);
+            out.println(newOrder.table + "," + newOrder.hour + "," + newOrder.minute + "," + newOrder.second + "," + newOrder.id + "," + newOrder.user);
             out.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -27,29 +27,26 @@ public class UserRepository implements Repository<User> {
                 User readUser = new User(id, password, isAdmin);
 
                 this.users.add(readUser);
-
-
             }
-
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-        @Override
+    @Override
     public void add(User newUser) {
-            this.users.add(newUser);
+        this.users.add(newUser);
 
-            try {
-                FileWriter fw = new FileWriter("./data/users.csv", true);
-                BufferedWriter bw = new BufferedWriter(fw);
-                PrintWriter out = new PrintWriter(bw);
-                out.println(newUser.getId() + "," + newUser.getPassword() + "," + newUser.isAdmin());
-                out.close();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            FileWriter fw = new FileWriter("./data/users.csv", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw);
+            out.println(newUser.getId() + "," + newUser.getPassword() + "," + newUser.isAdmin());
+            out.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+    }
 
     @Override
     public User get(int id) {

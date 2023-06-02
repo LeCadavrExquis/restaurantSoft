@@ -11,7 +11,6 @@ public class PlateRepository implements Repository<Dania> {
     private ArrayList<Dania> plates = new ArrayList<Dania>();
 
     public PlateRepository() {
-        // TODO load repository from file
         File plateCsv = new File("./data/plates.csv");
 
         try {
@@ -24,29 +23,19 @@ public class PlateRepository implements Repository<Dania> {
                 int orderId = Integer.parseInt(splited[0]);
                 String type = splited[1];
                 double price = Double.parseDouble(splited[2]);
-                int id = Integer.parseInt(splited[2]);
+                int id = Integer.parseInt(splited[3]);
 
-                Dania plate = new Dania( orderId,price,type,id);
+                Dania plate = new Dania(orderId, price, type, id);
 
                 this.plates.add(plate);
-
-
             }
-
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-        this.plates.add(new Dania(88, 30.0, "Pizza", 2));
-        this.plates.add(new Dania(88, 5.5, "Napój", 3));
-        this.plates.add(new Dania(88, 22.0, "Pierogi", 4));
-        this.plates.add(new Dania(88, 25.0, "Makaron", 5));
-        this.plates.add(new Dania(88, 5.5, "Napój", 6));
     }
 
     @Override
     public void add(Dania plate) {
-        // TODO: sprawdź czy id obiektu plate is unikalne (nie ma go w liście plates)
         for (int i = 0; i < plates.size(); i++) {
             if (plate.id == plates.get(i).id) {
 
@@ -64,9 +53,8 @@ public class PlateRepository implements Repository<Dania> {
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter out = new PrintWriter(bw);
 
-        out.println(plate.id);
+        out.println(plate.orderId + "," + plate.type + "," + plate.price + "," + plate.id);
         out.close();
-        // TODO: zapisz płatność do pliku 'plates.csv'
     }
 
     @Override

@@ -1,7 +1,6 @@
 package model;
 
-
-
+// TODO: implement encapsulation
 public class Dania
 {
     public double price = 0;
@@ -21,8 +20,5 @@ public class Dania
         {
             System.out.println("Wrong data");
         }
-
     }
-
-
 }

@@ -30,32 +30,33 @@ public class Window extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String actionCommand = e.getActionCommand();
+        String action = e.getActionCommand();
 
-        if (actionCommand.equals("LOGIN")) {
-            JLabel textField = (JLabel) e.getSource();
+        switch (action) {
+            case "LOGIN":
+                JLabel textField = (JLabel) e.getSource();
 
-            String text = textField.getText();
-            String[] splitedText = text.split("#");
+                String text = textField.getText();
+                String[] splitedText = text.split("#");
 
-            int id = Integer.parseInt(splitedText[0]);
-            int password = Integer.parseInt(splitedText[1]);
+                int id = Integer.parseInt(splitedText[0]);
+                int password = Integer.parseInt(splitedText[1]);
 
-            boolean isLogInSuccessfull = this.actions.logIn(id, password);
+                boolean isLogInSuccessfull = this.actions.logIn(id, password);
 
-            if (!isLogInSuccessfull) {
-                ((LoginView)this.mainView.getComponent(0)).drawError();
-            }
-        }
-        if (actionCommand.equals("ORDER")) {
-            // TODO pobierz potrzebne dane z ui i wywołaj funkcję controllera 'order'
-            int currentTable = ((DashboardView)this.mainView).getCurrentTable();
-            ArrayList<Dania> orderedPlates = ((DashboardView) this.mainView).getOrderedPlates();
-            this.actions.order(currentTable, orderedPlates);
-            System.out.println("elko");
-        }
-        if (actionCommand.equals("PAY")) {
-            //this.actions.pay();
+                if (!isLogInSuccessfull) {
+                    ((LoginView)this.mainView.getComponent(0)).drawError();
+                }
+                break;
+            case "ORDER":
+                // TODO pobierz potrzebne dane z ui i wywołaj funkcję controllera 'order'
+                DashboardView dashboard = (DashboardView)e.getSource();
+                int currentTable = dashboard.getCurrentTable();
+                ArrayList<Dania> orderedPlates = dashboard.getOrderedPlates();
+                this.actions.order(currentTable, orderedPlates);
+                break;
+            case "PAY":
+                break;
         }
     }
 
@@ -64,9 +65,8 @@ public class Window extends JFrame implements ActionListener {
         if (user.isAdmin()) {
             this.mainView.add(new AdminView());
         } else {
-            DashboardView dashboard = new DashboardView(user);
-            dashboard.setControllerActionListener(this);
-            this.mainView.add(new DashboardView(user));
+            DashboardView dashboard = new DashboardView(user, this);
+            this.mainView.add(dashboard);
         }
         this.revalidate();
         this.repaint();

@@ -17,6 +17,7 @@ public class Controller implements ControllerActions {
     private PaymentRepository paymentRepository;
     private PlateRepository plateRepository;
     private OrderRepository orderRepository;
+    private User currentUser;
 
     public Controller(Window window) {
         this.window = window;
@@ -38,6 +39,7 @@ public class Controller implements ControllerActions {
         }
 
         if (user.getPassword() == password) {
+            this.currentUser = user;
             this.window.goToDashboard(user);
             return true;
         } else {
@@ -52,15 +54,14 @@ public class Controller implements ControllerActions {
         int minutes = date.getMinutes();
         int seconds = date.getSeconds();
         int orderId = new Random().nextInt();
-        Zamowienie order = new Zamowienie(table,hours,minutes,seconds,orderId);
-        // TODO: dodaj zamówienie do OrderRepository
+        Zamowienie order = new Zamowienie(table,hours,minutes,seconds,orderId,this.currentUser.getId());
+
         this.orderRepository.add(order);
-        // TODO: dodaj zamówione dania do PlatesRepository
+
         for(Dania plate : plates)
         {
             this.plateRepository.add(plate);
         }
-
     }
 
     @Override
